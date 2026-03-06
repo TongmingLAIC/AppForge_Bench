@@ -5,6 +5,7 @@ import os
 import time
 import shutil
 import json
+import stat
 from create_template import AndroidTemplateManager, TemplateFileReplacer
 class TemplateBasedCompiler:
     """基于模板的Android编译器"""
@@ -91,6 +92,10 @@ class AndroidBuilder:
             'build_output': ''
         }
         try:
+            gradlew_path = os.path.join(project_path, 'gradlew')
+            if os.path.exists(gradlew_path):
+                st = os.stat(gradlew_path)
+                os.chmod(gradlew_path, st.st_mode | stat.S_IEXEC)
             # 设置环境变量
             env = os.environ.copy()
             env['ANDROID_HOME'] = self.android_sdk_path
