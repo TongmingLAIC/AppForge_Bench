@@ -142,7 +142,7 @@ class AndroidBuilder:
         lines = stderr.split('\n')
         
         for line in lines:
-            if 'error:' in line.lower() or 1:
+            if 'error:' in line.lower():
                 errors.append(line.strip())
                 
         return errors

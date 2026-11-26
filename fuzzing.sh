@@ -137,7 +137,7 @@ while [ $(date +%s) -lt $END_TIME ]; do
     wait $MONITOR_PID 2>/dev/null
     
     # 收集额外的crash信息
-    if [ -f /data/tombstones ]; then
+    if [ -d /data/tombstones ]; then
         echo "$(date): Checking tombstones..." | tee -a $MAIN_LOG
         adb shell "ls -la /data/tombstones/ | tail -5" >> $CRASH_LOG 2>/dev/null
     fi
